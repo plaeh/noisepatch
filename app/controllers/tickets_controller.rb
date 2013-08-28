@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+  before_filter :authenticate_user!, :except => %w{index show new create}
+
   # GET /tickets
   # GET /tickets.json
   def index
@@ -41,6 +43,7 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(params[:ticket])
+    @ticket.requestor = current_hacker if current_hacker
 
     respond_to do |format|
       if @ticket.save
@@ -57,6 +60,7 @@ class TicketsController < ApplicationController
   # PUT /tickets/1.json
   def update
     @ticket = Ticket.find(params[:id])
+    @ticket.requestor = current_hacker if current_hacker
 
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])

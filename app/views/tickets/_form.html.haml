@@ -14,19 +14,15 @@
   .control-group
     = f.label :due_at, :class => 'control-label'
     .controls
-      = f.datetime_select :due_at, :class => 'datetime_select'
+      = f.text_field :due_at, :class => 'datepicker', :placeholder => 'Date'
   .control-group
     = f.label :complexity, :class => 'control-label'
     .controls
-      = f.number_field :complexity, :class => 'number_field'
+      = f.select :complexity, [ 1, 2, 4, 8 ]
   .control-group
-    = f.label :requestor_id, :class => 'control-label'
+    = f.label :owner_id, 'Owner', :class => 'control-label'
     .controls
-      = f.number_field :requestor_id, :class => 'number_field'
-  .control-group
-    = f.label :owner_id, :class => 'control-label'
-    .controls
-      = f.number_field :owner_id, :class => 'number_field'
+      = f.select :owner_id, Hacker.all(:select => [ :email, :id ]).collect{|h| [h.email, h.id]}
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), tickets_path, :class => 'btn'

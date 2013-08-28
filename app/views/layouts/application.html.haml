@@ -29,23 +29,26 @@
           %a.brand(href="#") Noisepatch
           .container.nav-collapse
             %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+              %li
+                - if current_hacker
+                  = current_hacker.email
+                  = link_to "(log out)", destroy_hacker_session_path, :method => :delete
+                - else
+                  = link_to "Log In", new_hacker_session_path
 
     .container-fluid
 
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
-        .span9
+        / .span3
+        /   .well.sidebar-nav
+        /     %ul.nav.nav-list
+        /       %li.nav-header Sidebar
+        /       %li= link_to "Link 1", "/path1"
+        /       %li= link_to "Link 2", "/path2"
+        /       %li= link_to "Link 3", "/path3"
+        .span12
           = bootstrap_flash
           = yield
     
       %footer
-        %p &copy; Company 2013
+        
