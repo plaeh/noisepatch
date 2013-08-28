@@ -1,10 +1,11 @@
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, :except => %w{index show new create}
+  before_filter :authenticate_hacker!, :except => %w{index show new create}
 
   # GET /tickets
   # GET /tickets.json
   def index
     @tickets = Ticket.all
+    @ticket = Ticket.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,10 +27,12 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   # GET /tickets/new.json
   def new
+    layout_format = params[:layout] != "false"
+
     @ticket = Ticket.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :layout => layout_format } # new.html.erb
       format.json { render json: @ticket }
     end
   end
@@ -47,7 +50,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.html { redirect_to tickets_path, notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else
         format.html { render action: "new" }

@@ -19,4 +19,25 @@
 
 $(document).ready(function() {
   $('.datepicker').datepicker()
+  
+  // Modal Link helper, just use .modal_link !
+  var $modal = $('#ajax-modal');
+
+  $('body').on('click', 'a.modal_link', function(e) {
+    e.preventDefault();
+    var a = $(this)[0];
+    var url
+    if ( (a.search + "") == "") {
+      url = a.href + "?layout=false"
+    } else {
+      url = a.href + "&layout=false"
+    }
+
+
+    $modal.html('')
+    $modal.load(url, '', function() {
+      $modal.find('.datepicker').datepicker({ dateFormat: 'mm/dd/yy'});
+      $modal.modal();
+    });
+  });
 })

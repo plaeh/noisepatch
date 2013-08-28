@@ -31,8 +31,8 @@
             %ul.nav
               %li
                 - if current_hacker
-                  = current_hacker.email
-                  = link_to "(log out)", destroy_hacker_session_path, :method => :delete
+                  .span= current_hacker.email
+                  .span= link_to "(log out)", destroy_hacker_session_path, :method => :delete
                 - else
                   = link_to "Log In", new_hacker_session_path
 
@@ -52,3 +52,8 @@
     
       %footer
         
+
+    #ajax-modal.modal.hide.fade{:tabindex => "-1"}
+    #page_loading.block
+      .progress.progress-striped.active.centered
+        .bar{:style => 'width:100%'}
