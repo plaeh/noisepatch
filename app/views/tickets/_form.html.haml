@@ -4,18 +4,18 @@
       .control-group
         = f.label :title, :class => 'control-label'
         .controls
-          = f.text_field :title, :class => 'text_field'
+          = f.text_field :title, :class => 'text_field', :placeholder => 'Short description of ticket'
       .control-group
         = f.label :description, :class => 'control-label'
         .controls
-          = f.text_area :description, :class => 'text_area', :rows => 5
+          = f.text_area :description, :class => 'text_area', :rows => 5, :placeholder => 'Full description of ticket'
     .span6
       .control-group
         = f.label :ticket_type, :class => 'control-label'
         .controls
           = f.text_field :ticket_type, :class => 'text_field'
       .control-group
-        = f.label :due_at, :class => 'control-label'
+        = f.label :due_at, :class => 'control-label', :placeholder => 'Required completion date (opt)'
         .controls
           = f.text_field :due_at, :class => 'datepicker', :placeholder => 'Date'
       .control-group
@@ -26,7 +26,7 @@
         = f.label :owner_id, 'Owner', :class => 'control-label'
         .controls
           = f.select :owner_id, [[]] + Hacker.all(:select => [ :email, :id ]).collect{|h| [h.email, h.id]}
-          
+
   .row-fluid
     .span12
       .form-actions
