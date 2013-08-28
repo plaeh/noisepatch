@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  ticket_type: MyString
+  due_at: 2013-08-28 00:42:52
+  complexity: 1
+  requestor_id: 1
+  owner_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  ticket_type: MyString
+  due_at: 2013-08-28 00:42:52
+  complexity: 1
+  requestor_id: 1
+  owner_id: 1

@@ -1,4 +1,7 @@
 Noisepatch::Application.routes.draw do
+  resources :tickets
+  root to: 'tickets#index'
+
   devise_for :hackers
 
   # The priority is based upon order of creation:
