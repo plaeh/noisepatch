@@ -23,6 +23,8 @@ end
 gem 'twitter-bootstrap-rails'
 gem 'devise'
 gem 'therubyracer'
+gem 'haml'
+gem 'haml-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
