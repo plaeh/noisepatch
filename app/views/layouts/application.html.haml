@@ -26,12 +26,12 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") Noisepatch
+            %a.brand{href: root_url} Noisepatch
           .container.nav-collapse
             %ul.nav
               %li
                 - if current_hacker
-                  .span= current_hacker.email
+                  .span= current_hacker.username
                   .span= link_to "(log out)", destroy_hacker_session_path, :method => :delete
                 - else
                   = link_to "Log In", new_hacker_session_path

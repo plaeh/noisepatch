@@ -25,11 +25,11 @@
 %p
   %strong= model_class.human_attribute_name(:requestor_id) + ':'
   %br
-  = @ticket.requestor_id
+  = @ticket.requestor.try :username
 %p
   %strong= model_class.human_attribute_name(:owner_id) + ':'
   %br
-  = @ticket.owner_id
+  = @ticket.owner.try :username
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), tickets_path, :class => 'btn'
