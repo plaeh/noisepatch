@@ -21,6 +21,7 @@ class Hacker < ActiveRecord::Base
   end
   
   # Validations
+  validates_presence_of :username
   validates :username, uniqueness: { case_sensitive: false }
   validates :email, uniqueness: { case_sensitive: false } 
 end
