@@ -1,31 +1,57 @@
-- model_class = Ticket
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+#tickets
+  - model_class = Ticket
+  .page-header
+    %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 
-.new_ticket
-  = render 'form'
+  .new_ticket
+    = render 'form'
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:complexity)
-      %th= model_class.human_attribute_name(:requestor_id)
-      %th= model_class.human_attribute_name(:owner_id)
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @tickets.each do |ticket|
+  %table.table.table-striped#open_tickets
+    %thead
       %tr
-        %td= link_to ticket.id, ticket_path(ticket)
-        %td= ticket.title
-        %td= truncate ticket.description, :length => 200
-        %td
-          - (ticket.complexity || 0).times do
-            &#10084;
-        %td= ticket.requestor.try :username
-        %td= ticket.owner.try :username
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_ticket_path(ticket), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), ticket_path(ticket), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+        %th= model_class.human_attribute_name(:id)
+        %th= model_class.human_attribute_name(:title)
+        %th= model_class.human_attribute_name(:description)
+        %th= model_class.human_attribute_name(:complexity)
+        %th= model_class.human_attribute_name(:requestor_id)
+        %th= model_class.human_attribute_name(:owner_id)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @tickets.each do |ticket|
+        %tr
+          %td= link_to ticket.id, ticket_path(ticket)
+          %td= ticket.title
+          %td= truncate ticket.description, :length => 200
+          %td
+            - (ticket.complexity || 0).times do
+              &#10084;
+          %td= ticket.requestor.try :username
+          %td= ticket.owner.try :username
+          %td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_ticket_path(ticket), :class => 'btn btn-mini'
+
+  %button#show_resolved_tickets Show Resolved Tickets
+
+  %table.table.table-striped#resolved_tickets
+    %thead
+      %tr
+        %th= model_class.human_attribute_name(:id)
+        %th= model_class.human_attribute_name(:title)
+        %th= model_class.human_attribute_name(:description)
+        %th= model_class.human_attribute_name(:complexity)
+        %th= model_class.human_attribute_name(:requestor_id)
+        %th= model_class.human_attribute_name(:owner_id)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @resolved_tickets.each do |ticket|
+        %tr
+          %td= link_to ticket.id, ticket_path(ticket)
+          %td= ticket.title
+          %td= truncate ticket.description, :length => 200
+          %td
+            - (ticket.complexity || 0).times do
+              &#10084;
+          %td= ticket.requestor.try :username
+          %td= ticket.owner.try :username
+          %td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_ticket_path(ticket), :class => 'btn btn-mini'

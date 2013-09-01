@@ -4,7 +4,8 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.where( 'status != ?', :resolved )
+    @resolved_tickets = Ticket.where( 'status = ?', :resolved )
     @ticket = Ticket.new
 
     respond_to do |format|
@@ -67,7 +68,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
+        format.html { redirect_to tickets_path, notice: 'Ticket was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

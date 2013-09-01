@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829223997) do
+ActiveRecord::Schema.define(:version => 20130901013120) do
 
   create_table "hackers", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(:version => 20130829223997) do
     t.integer  "complexity"
     t.integer  "requestor_id"
     t.integer  "owner_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "status",       :default => "open"
   end
 
 end
