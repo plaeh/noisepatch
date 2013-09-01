@@ -4,8 +4,8 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.where( 'status != ?', :resolved )
-    @resolved_tickets = Ticket.where( 'status = ?', :resolved )
+    @tickets = Ticket.unresolved
+    @resolved_tickets = Ticket.resolved
     @ticket = Ticket.new
 
     respond_to do |format|

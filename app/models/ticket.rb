@@ -8,6 +8,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :owner, :class_name => Hacker
   belongs_to :requestor, :class_name => Hacker
 
+  scope :unresolved, where( 'status != ?', :resolved )
+  scope :resolved, where( 'status = ?', :resolved )
+
   STATUS_TYPES = {
     :open => 'Open',
     :resolved => 'Resolved'
